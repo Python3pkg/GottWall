@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import human_curl as hurl
-from urlparse import urljoin
+from urllib.parse import urljoin
 from datetime import datetime
 from stati_net import HTTPClient
 from random import choice
@@ -54,13 +54,13 @@ with AsyncClient(success_callback=success_callback,
                  size=1000) as async_client:
 
 
-    for x in xrange(10):
+    for x in range(10):
         test_data = {"name": choice(["orders", "posts", "comments"]), "value": choice([2, 1]),
                      "timestamp": datetime.utcnow(),
                      "filters": {"status": ["Completed", "Test"]}}
         async_client.post(url=client.get_url('incr'), data=client.serialize(**test_data),
-                          headers=client.headers.items())
+                          headers=list(client.headers.items()))
 
-print("Success: {0}".format(success_count))
-print("Fail: {0}".format(fail_count))
-print("Bad response: {0}".format(bad_response_count))
+print(("Success: {0}".format(success_count)))
+print(("Fail: {0}".format(fail_count)))
+print(("Bad response: {0}".format(bad_response_count)))

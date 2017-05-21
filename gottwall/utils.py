@@ -22,9 +22,9 @@ from dateutil.rrule import rrule, MINUTELY, MONTHLY, DAILY, HOURLY, YEARLY, WEEK
 # Passes Python2.7's test suite and incorporates all the latest updates.
 
 try:
-    from thread import get_ident as _get_ident
+    from _thread import get_ident as _get_ident
 except ImportError:
-    from dummy_thread import get_ident as _get_ident
+    from _dummy_thread import get_ident as _get_ident
 
 try:
     from _abcoll import KeysView, ValuesView, ItemsView
@@ -32,7 +32,7 @@ except ImportError:
     pass
 
 
-from settings import PROJECT_ROOT, TIMESTAMP_FORMAT, PERIOD_PATTERNS
+from .settings import PROJECT_ROOT, TIMESTAMP_FORMAT, PERIOD_PATTERNS
 
 
 __all__ = 'rel',
@@ -47,7 +47,7 @@ def timestamp_to_datetime(timestamp, format=TIMESTAMP_FORMAT):
 
     :param timestamp: str
     """
-    if isinstance(timestamp, (str, unicode)):
+    if isinstance(timestamp, str):
         return datetime.strptime(timestamp, format)
     elif isinstance(timestamp, int):
         return datetime.fromtimestamp(timestamp)

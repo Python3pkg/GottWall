@@ -109,7 +109,7 @@ class BaseHandler(RequestHandler):
                     return self.jinja_env.get_template(template)
                 except TemplateNotFound:
                     continue
-        elif isinstance(templates, (str, unicode)):
+        elif isinstance(templates, str):
             return self.jinja_env.get_template(templates)
 
         raise TemplateNotFound(templates)

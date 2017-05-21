@@ -154,7 +154,7 @@ class HTMLCompress(Extension):
             return
         for idx, other_tag in enumerate(reversed(ctx.stack)):
             if other_tag == tag:
-                for num in xrange(idx + 1):
+                for num in range(idx + 1):
                     ctx.stack.pop()
             elif not self.breaking_rules.get(other_tag):
                 break
@@ -179,7 +179,7 @@ class HTMLCompress(Extension):
             pos = match.end()
 
         write_data(ctx.token.value[pos:])
-        return u''.join(buffer)
+        return ''.join(buffer)
 
     def filter_stream(self, stream):
         ctx = StreamProcessContext(stream)
@@ -219,7 +219,7 @@ class SelectiveHTMLCompress(HTMLCompress):
                 yield Token(stream.current.lineno, 'data', value)
             else:
                 yield stream.current
-            stream.next()
+            next(stream)
 
 
 spaceless = SpacelessExtension

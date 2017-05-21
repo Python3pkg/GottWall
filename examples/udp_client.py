@@ -106,7 +106,7 @@ class UDPClient(Client):
                 raise RuntimeError("Invalid body size")
 
             socket.sendto(body, (self.host, self.port))
-        except Exception, e:
+        except Exception as e:
             print(e)
             global bad_requests
             bad_requests += 1
@@ -130,7 +130,7 @@ stats_client = UDPClient(project=project, private_key=private_key,
 
 
 
-for x in xrange(10):
+for x in range(10):
     stats_client.incr(**{"name": choice(["orders", "posts", "comments"]), "value": choice([2, 1]),
                      "timestamp": datetime.utcnow(),
                      "filters": {"status": ["Completed", "Test"]}})
@@ -138,4 +138,4 @@ for x in xrange(10):
 #time.sleep(10)
 
 print("finished")
-print("bad_requests{0}".format(bad_requests))
+print(("bad_requests{0}".format(bad_requests)))

@@ -17,7 +17,7 @@ import os.path
 import os
 import base64
 
-from settings import PERIODS
+from .settings import PERIODS
 
 
 KEY_LENGTH = 40
@@ -36,8 +36,8 @@ class Config(dict):
         d = imp.new_module('config')
         d.__file__ = filename
         try:
-            execfile(filename, d.__dict__)
-        except IOError, e:
+            exec(compile(open(filename).read(), filename, 'exec'), d.__dict__)
+        except IOError as e:
             raise Exception("Unable to load configuration file {0}: ".\
                             format(filename, e))
 

@@ -26,7 +26,7 @@ class Project(Base):
 
 
     def __repr__(self):
-        return u"<Project({0}, {1}".format(self.id, self.name)
+        return "<Project({0}, {1}".format(self.id, self.name)
 
 
 class User(Base):
@@ -38,4 +38,4 @@ class User(Base):
     password = Column(String)
 
     def __repr__(self):
-        return u"<User('%s','%s', '%s')>" % (self.name, self.fullname, self.password)
+        return "<User('%s','%s', '%s')>" % (self.name, self.fullname, self.password)

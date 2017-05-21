@@ -61,7 +61,7 @@ class ProcessorTestCase(AsyncBaseTestCase):
 
 
         # Add messages
-        for x in xrange(20):
+        for x in range(20):
             app.add_task(add_res, "arg{0}".format(x), params={"key": "value{0}".format(x)})
 
         self.assertEquals(len(app.tasks), 20)

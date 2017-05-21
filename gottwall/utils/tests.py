@@ -13,7 +13,7 @@ Utils for gottwall tests
 import datetime
 import os
 import unittest
-from itertools import ifilter, groupby
+from itertools import groupby
 from random import randint, choice
 from string import ascii_letters
 
@@ -27,7 +27,7 @@ def async_test_ex(timeout=5):
         def _runner(self, *args, **kwargs):
             try:
                 func(self, *args, **kwargs)
-            except Exception, e:
+            except Exception as e:
                 print(e)
                 self.stop()
                 raise
@@ -45,19 +45,19 @@ def async_test(func):
 class UtilsMixin(object):
 
     def random_str(self, size=10):
-        return ''.join([choice(ascii_letters) for x in xrange(10)])
+        return ''.join([choice(ascii_letters) for x in range(10)])
 
     @staticmethod
     def build_data(from_date, to_date, project_name,
                    metric_name, filters={}, size=1000, value=1):
         data = []
 
-        for x in xrange(size):
-            if not filters or not filters.keys() or (None in filters):
+        for x in range(size):
+            if not filters or not list(filters.keys()) or (None in filters):
                 filter_name = None
                 filter_value = None
             else:
-                filter_name = choice(filters.keys())
+                filter_name = choice(list(filters.keys()))
                 filter_value = choice(filters[filter_name]) \
                                if isinstance(filters[filter_name], list) \
                                else filters[filter_name]
@@ -78,7 +78,7 @@ class UtilsMixin(object):
         :param from_date: datetime
         :param to_date: datetime
         """
-        return sorted(ifilter(lambda x: (x['timestamp'] >= from_date) and (x['timestamp'] <= to_date), data),
+        return sorted(filter(lambda x: (x['timestamp'] >= from_date) and (x['timestamp'] <= to_date), data),
                       key=lambda x: x['timestamp'])
 
     def get_for_period(self, data, period):

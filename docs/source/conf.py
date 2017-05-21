@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'GottWall Scalable Realtime Statistics Aggregator'
-copyright = u'2012, GottWall team'
+project = 'GottWall Scalable Realtime Statistics Aggregator'
+copyright = '2012, GottWall team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -183,8 +183,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'GottWallScalableRealtimeStatisticsAggregator.tex', u'GottWall Scalable Realtime Statistics Aggregator Documentation',
-   u'GottWall team', 'manual'),
+  ('index', 'GottWallScalableRealtimeStatisticsAggregator.tex', 'GottWall Scalable Realtime Statistics Aggregator Documentation',
+   'GottWall team', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -213,8 +213,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'gottwallscalablerealtimestatisticsaggregator', u'GottWall Scalable Realtime Statistics Aggregator Documentation',
-     [u'GottWall team'], 1)
+    ('index', 'gottwallscalablerealtimestatisticsaggregator', 'GottWall Scalable Realtime Statistics Aggregator Documentation',
+     ['GottWall team'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -227,7 +227,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'GottWallScalableRealtimeStatisticsAggregator', u'GottWall Scalable Realtime Statistics Aggregator Documentation', u'GottWall team',
+  ('index', 'GottWallScalableRealtimeStatisticsAggregator', 'GottWall Scalable Realtime Statistics Aggregator Documentation', 'GottWall team',
    'GottWallScalableRealtimeStatisticsAggregator', 'One line description of project.', 'Miscellaneous'),
 ]
 

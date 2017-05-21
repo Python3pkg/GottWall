@@ -174,10 +174,10 @@ class HTTPBackendHandler(BaseBackend, RequestHandler):
         hosts = {}
         handlers = app.handlers
         for host, patterns in handlers:
-            if host not in hosts.keys():
+            if host not in list(hosts.keys()):
                 hosts[host] = []
             hosts[host] += patterns
-        app.handlers = [(host, patterns) for host, patterns in hosts.items()]
+        app.handlers = [(host, patterns) for host, patterns in list(hosts.items())]
 
     def process_data(self, project, action, data, callback=None):
         """Process `data`

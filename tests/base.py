@@ -16,7 +16,7 @@ import unittest
 import hmac
 import hashlib
 
-from itertools import ifilter, groupby
+from itertools import groupby
 from random import randint, choice
 from string import ascii_letters
 

@@ -20,7 +20,7 @@ from setuptools import setup, find_packages
 try:
     readme_content = open(os.path.join(os.path.abspath(
         os.path.dirname(__file__)), "README.rst")).read()
-except Exception, e:
+except Exception as e:
     print(e)
     readme_content = __doc__
 
@@ -29,7 +29,7 @@ VERSION = "0.5.0"
 
 
 def run_tests():
-    from tests import suite
+    from .tests import suite
     return suite()
 
 py_ver = sys.version_info

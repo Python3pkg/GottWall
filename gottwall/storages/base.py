@@ -12,7 +12,7 @@ GottWall storages backends
 """
 import uuid
 
-from itertools import ifilter, imap
+
 from logging import getLogger
 
 from tornado import gen
@@ -70,7 +70,7 @@ class BaseStorage(object):
             metric['m'] = metric.pop('metric_name', None)
             metric['fv'] = metric.pop('filter_value', None)
 
-            for k, v in metric.items():
+            for k, v in list(metric.items()):
                 if (k not in ['m', 'fn', 'fv']) or not v:
                     del metric[k]
 
@@ -122,7 +122,7 @@ class BaseStorage(object):
         """Get additional info for `data_range`
         """
 
-        filtered_range_values = map(lambda x: int(x[1]), data_range)
+        filtered_range_values = [int(x[1]) for x in data_range]
         if filtered_range_values:
             min_info = min(filtered_range_values or [])
             max_info = max(filtered_range_values or [])
@@ -169,7 +169,7 @@ class BaseStorage(object):
             items[value]['range'] = self.filter_by_period(
                 tmp_range, period, from_date, to_date)
 
-            filtered_range_values = map(lambda x: int(x[1]), items[value]['range'])
+            filtered_range_values = [int(x[1]) for x in items[value]['range']]
 
             items[value]['avg'] = (sum(filtered_range_values) / len(items[value]['range'])) \
                                   if ((len(items[value]['range']) > 0) and filtered_range_values) else 0
@@ -202,9 +202,9 @@ class BaseStorage(object):
         from_date = get_by_period(from_date, period)
         to_date = get_by_period(to_date, period)
 
-        return sorted(ifilter(lambda x: (True if from_date is None else int(x[0]) >= from_date) and \
+        return sorted(filter(lambda x: (True if from_date is None else int(x[0]) >= from_date) and \
                               (True if to_date is None else int(x[0]) <= to_date),
-                              imap(lambda item: (int(item[0]), int(item[1])), data)),
+                              map(lambda item: (int(item[0]), int(item[1])), data)),
                       key=lambda x: x[0])
 
 

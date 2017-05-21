@@ -17,13 +17,13 @@ import tornado.ioloop
 from jinja2 import Environment, FileSystemLoader
 from tornado.web import Application, URLSpec
 
-from handlers import DashboardHandler, LoginHandler, HomeHandler,\
+from .handlers import DashboardHandler, LoginHandler, HomeHandler,\
      NotFoundHandler, LogoutHandler
-from api_v1 import (StatsHandlerV1, MetricsHandlerV1, StatsDataSetHandlerV1,
+from .api_v1 import (StatsHandlerV1, MetricsHandlerV1, StatsDataSetHandlerV1,
                     HTMLEmbeddedHandlerV1, JSONEmbeddedHandlerV1,
                     JSEmbeddedHandlerV1, EmbeddedCreateHandlerV1)
-from jinja_utils import load_filters, load_globals
-from processing import Tasks
+from .jinja_utils import load_filters, load_globals
+from .processing import Tasks
 
 
 ## from sqlalchemy import create_engine
@@ -114,6 +114,6 @@ class HTTPApplication(Application):
         try:
             module = importlib.import_module(module_path, name)
             storage = getattr(module, name)
-        except (ImportError, AttributeError), e:
+        except (ImportError, AttributeError) as e:
             raise Exception("Invalid storage: {0}".format(e))
         return storage.setup(self)

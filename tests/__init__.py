@@ -13,12 +13,12 @@ Unittests for gottwall
 
 import unittest
 
-from config import ConfigTestCase
-from backends import TCPBackendTestCase, HTTPBackendTestCase, UDPBackendTestCase
-from api import APITestCase
-from storages import (StorageTestCase, MemoryStorageTestCase)
-from utils import UtilsTestCase
-from app import ProcessorTestCase
+from .config import ConfigTestCase
+from .backends import TCPBackendTestCase, HTTPBackendTestCase, UDPBackendTestCase
+from .api import APITestCase
+from .storages import (StorageTestCase, MemoryStorageTestCase)
+from .utils import UtilsTestCase
+from .app import ProcessorTestCase
 
 
 def suite():

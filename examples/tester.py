@@ -18,4 +18,4 @@ headers = (("content-type", "application/json"),
 
 r = hurl.post("http://127.0.0.1:8889/test_project/api/store",  data=json.dumps(metric_data), headers=headers)
 
-print r.content
+print(r.content)

@@ -143,7 +143,7 @@ stats_client = TCPIPClient(project=project, private_key=private_key,
                      public_key=public_key, host=host, port=port)
 
 
-for x in xrange(10):
+for x in range(10):
     stats_client.incr(**{"name": choice(["orders", "posts", "comments"]), "value": choice([2, 1]),
                      "timestamp": datetime.utcnow(),
                      "filters": {"status": ["Completed", "Test"]}})
@@ -151,7 +151,7 @@ for x in xrange(10):
 #time.sleep(120)
 
 print("finished")
-print("bad_requests{0}".format(bad_requests))
+print(("bad_requests{0}".format(bad_requests)))
 
 
 # real    2m46.798s

@@ -87,7 +87,7 @@ class Init(Command):
         if os.path.exists(filename):
 
             while True:
-                ans = raw_input("Are you sure to rewrite {0}? [y/n]".format(filename))
+                ans = input("Are you sure to rewrite {0}? [y/n]".format(filename))
                 if not ans:
                     continue
                 if ans not in ['y', 'Y', 'n', 'N']:
@@ -276,7 +276,7 @@ class Alembic(Command):
             fn(alembic_cfg,
                *[getattr(options, k) for k in positional],
                **dict((k, getattr(options, k)) for k in kwarg))
-        except util.CommandError, e:
+        except util.CommandError as e:
             util.err(str(e))
 
 

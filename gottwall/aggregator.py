@@ -19,8 +19,8 @@ import tornado.ioloop
 from tornado import gen
 from tornado.web import Application, URLSpec
 
-from processing import PeriodicProcessor, Tasks, StatusPeriodicCallback
-from utils import pretty_timedelta, Cache
+from .processing import PeriodicProcessor, Tasks, StatusPeriodicCallback
+from .utils import pretty_timedelta, Cache
 
 ## from sqlalchemy import create_engine
 ## from sqlalchemy.orm import scoped_session, sessionmaker
@@ -85,7 +85,7 @@ class AggregatorApplication(object):
         try:
             module = importlib.import_module(module_path, name)
             storage = getattr(module, name)
-        except (ImportError, AttributeError), e:
+        except (ImportError, AttributeError) as e:
             raise Exception("Invalid storage: {0}".format(e))
         return storage.setup(self)
 
@@ -103,7 +103,7 @@ class AggregatorApplication(object):
             try:
                 backend_module = importlib.import_module(module_path, name)
                 backend = getattr(backend_module, name)
-            except (ImportError, AttributeError), e:
+            except (ImportError, AttributeError) as e:
                 raise Exception("Invalid backend: {0}".format(e))
             self.backends.append(backend.setup_backend(self, io_loop, config, storage, tasks))
 

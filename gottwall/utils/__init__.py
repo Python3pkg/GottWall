@@ -22,9 +22,9 @@ from dateutil.rrule import rrule, MINUTELY, MONTHLY, DAILY, HOURLY, YEARLY, WEEK
 # Passes Python2.7's test suite and incorporates all the latest updates.
 
 try:
-    from thread import get_ident as _get_ident
+    from _thread import get_ident as _get_ident
 except ImportError:
-    from dummy_thread import get_ident as _get_ident
+    from _dummy_thread import get_ident as _get_ident
 
 try:
     from _abcoll import KeysView, ValuesView, ItemsView
@@ -49,7 +49,7 @@ def timestamp_to_datetime(timestamp, format=TIMESTAMP_FORMAT):
 
     :param timestamp: str
     """
-    if isinstance(timestamp, (str, unicode)):
+    if isinstance(timestamp, str):
         return datetime.strptime(timestamp, format)
     elif isinstance(timestamp, int):
         return datetime.fromtimestamp(timestamp)
@@ -184,7 +184,7 @@ class memo_decorator(base_memo_decorator):
     """Decorator for only position functions args
     """
     def make_key(self, args, kwargs):
-        return (self.func.__module__, self.func.func_name,
+        return (self.func.__module__, self.func.__name__,
                 args, None)
 
 class Cache(dict):
@@ -192,7 +192,7 @@ class Cache(dict):
 
     def __call__(self, f, *args):
         try:
-            return self[(f.__module__, f.func_name) + args]
+            return self[(f.__module__, f.__name__) + args]
         except KeyError:
-            self[(f.__module__, f.func_name) + args] = ret = f(*args)
+            self[(f.__module__, f.__name__) + args] = ret = f(*args)
             return ret

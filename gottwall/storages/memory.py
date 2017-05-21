@@ -11,7 +11,7 @@ Memory storage for collect statistics
 :github: http://github.com/GottWall/GottWall
 """
 
-from base import BaseStorage
+from .base import BaseStorage
 from gottwall.utils import get_by_period, MagicDict, date_min, timestamp_to_datetime
 from tornado import gen
 
@@ -100,15 +100,15 @@ class MemoryStorage(BaseStorage):
         if project not in self._metrics:
             self._metrics[project] = {}
 
-        if name not in self._metrics[project].keys():
+        if name not in list(self._metrics[project].keys()):
             self._metrics[project][name] = {}
 
         if not filters:
             filters = {}
 
-        for f, values in filters.iteritems():
+        for f, values in filters.items():
 
-            if f not in self._metrics[project][name].keys():
+            if f not in list(self._metrics[project][name].keys()):
                 self._metrics[project][name][f] = []
 
             if not isinstance(values, (list, tuple)):
@@ -138,7 +138,7 @@ class MemoryStorage(BaseStorage):
 
         for period in self._application.config['PERIODS']:
             if filters:
-                for fname, fvalue in filters.items():
+                for fname, fvalue in list(filters.items()):
                     self.save_value(project, name, period,
                                     get_by_period(date_min(timestamp, period), period), fname, fvalue, value)
             self.save_value(project, name, period,
@@ -179,7 +179,7 @@ class MemoryStorage(BaseStorage):
         """
 
         items = ((k, v[filter_name][filter_value] or 0)
-                 for k, v in self._store[project][name][period].items())
+                 for k, v in list(self._store[project][name][period].items()))
         if callback:
             callback(sorted(items, key=lambda x: x[0]))
 
@@ -216,7 +216,7 @@ class MemoryStorage(BaseStorage):
         """
 
         if callback:
-            callback(filter(lambda x: x !=  None, self._metrics[project][name].keys()))
+            callback([x for x in list(self._metrics[project][name].keys()) if x !=  None])
 
     @gen.engine
     def get_metrics_list(self, project, callback=None):
@@ -224,7 +224,7 @@ class MemoryStorage(BaseStorage):
         """
 
         if callback:
-            callback(self._metrics[project].keys() if project in self._metrics else [])
+            callback(list(self._metrics[project].keys()) if project in self._metrics else [])
 
     @gen.engine
     def metrics(self, project, callback=None):
@@ -235,7 +235,7 @@ class MemoryStorage(BaseStorage):
         """
 
         if callback:
-            if project not in self._metrics.keys():
+            if project not in list(self._metrics.keys()):
                 callback({})
             else:
                 callback(self._metrics[project])

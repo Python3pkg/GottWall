@@ -40,16 +40,16 @@ def pretty_time(td):
 @contextmanager
 def measure_time(title, logger=None, **debug_params):
     t1 = time.time()
-    print('Started "{0}" at {1}'. format(title, time.ctime(t1)))
+    print(('Started "{0}" at {1}'. format(title, time.ctime(t1))))
     yield
     t2 = time.time()
-    print('Finished "{0}" at {1} for the time {2}'.\
-          format(title, time.ctime(t2), pretty_time(t2-t1)))
+    print(('Finished "{0}" at {1} for the time {2}'.\
+          format(title, time.ctime(t2), pretty_time(t2-t1))))
 
 
 with measure_time("Test stats"):
-    for x in xrange(10000):
-        stats_client.incr(choice([u"APIv1", "APIv2", "APIv3"]),
+    for x in range(10000):
+        stats_client.incr(choice(["APIv1", "APIv2", "APIv3"]),
                           timestamp=datetime.datetime(choice([2012, 2013]), randint(1, 12), randint(1, 27)) + datetime.timedelta(days=randint(1, 4)),
                           value=randint(1, 10),
                           filters={choice(["status"]): choice(["200", "403", "500", "404", "401", "201"]),
@@ -61,8 +61,8 @@ with measure_time("Test stats"):
 
 
 with measure_time("Test stats"):
-    for x in xrange(10000):
-        stats_client.incr(u"Actions",
+    for x in range(10000):
+        stats_client.incr("Actions",
                           timestamp=datetime.datetime(choice([2012, 2013]), randint(1, 12), randint(1, 27)) + datetime.timedelta(days=randint(1, 4)),
                           value=randint(1, 5),
                           filters={"views": choice(["products", "special page"]),
@@ -74,8 +74,8 @@ with measure_time("Test stats"):
 
 
 with measure_time("Test stats"):
-    for x in xrange(10000):
-        stats_client.incr(choice([u"Reviews"]),
+    for x in range(10000):
+        stats_client.incr(choice(["Reviews"]),
                           timestamp=datetime.datetime(choice([2012, 2013]), randint(1, 12), randint(1, 27)) + datetime.timedelta(days=randint(1, 4)),
                           value=randint(1, 5),
                           filters={})
@@ -86,8 +86,8 @@ with measure_time("Test stats"):
 
 
 with measure_time("Test stats"):
-    for x in xrange(10000):
-        stats_client.incr(choice([u"Orders"]),
+    for x in range(10000):
+        stats_client.incr(choice(["Orders"]),
                           timestamp=datetime.datetime(choice([2012, 2013]), randint(1, 12), randint(1, 27)) + datetime.timedelta(days=randint(1, 4)),
                           value=randint(1, 5),
                           filters={"status": choice(["Completed", "New", "Canceled"])})

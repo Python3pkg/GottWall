@@ -29,7 +29,7 @@ from gottwall.settings import DATE_FILTER_FORMAT, PERIODS, DEFAULT_EMBEDDED_PARA
 
 logger = logging.getLogger('gottwall.apiv1')
 
-from handlers import SERVER_NAME, BaseHandler, JSONMixin, APIHandler
+from .handlers import SERVER_NAME, BaseHandler, JSONMixin, APIHandler
 
 
 class TimeMixin(object):

@@ -29,17 +29,17 @@ def pretty_time(td):
 @contextmanager
 def measure_time(title, logger=None, **debug_params):
     t1 = time.time()
-    print('Started "{0}" at {1}'. format(title, time.ctime(t1)))
+    print(('Started "{0}" at {1}'. format(title, time.ctime(t1))))
     yield
     t2 = time.time()
-    print('Finished "{0}" at {1} for the time {2}'.\
-          format(title, time.ctime(t2), pretty_time(t2-t1)))
+    print(('Finished "{0}" at {1} for the time {2}'.\
+          format(title, time.ctime(t2), pretty_time(t2-t1))))
 
 
 with measure_time("Test stats"):
-    for x in xrange(1000):
+    for x in range(1000):
 
-        stats_client.incr(choice([u"Hello", "Test", "test2"]),
+        stats_client.incr(choice(["Hello", "Test", "test2"]),
                           timestamp=datetime.datetime(choice([2012]), randint(1, 12), randint(1, 27)),
                           value=1,
                           filters={choice(["views", "orders", "filter1", "filter2"]): choice(["hello", "world", "registered"]),

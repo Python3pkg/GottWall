@@ -155,7 +155,7 @@ class APITestCase(AsyncHTTPBaseTestCase):
 
             response_data = json.loads(response.body)
 
-            for key, value in response_data['data'].items():
+            for key, value in list(response_data['data'].items()):
                 test_etalon_range = list(self.get_range(data, from_date, to_date,
                                                         period, "filter2", key))
 

@@ -31,7 +31,7 @@ static_url_prefix = "/static/"
 
 login_url = '/login'
 
-site_title=u"GottWall is a scalable realtime metrics collecting and aggregation platform and service."
+site_title="GottWall is a scalable realtime metrics collecting and aggregation platform and service."
 
 ALEMBIC_SCRIPT_LOCATION = 'gottwall:migrations'
 

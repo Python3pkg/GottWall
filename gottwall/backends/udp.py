@@ -121,7 +121,7 @@ class UDPServer(object):
         Requests currently in progress may still continue after the
         server is stopped.
         """
-        for fd, sock in self._sockets.items():
+        for fd, sock in list(self._sockets.items()):
             self.io_loop.remove_handler(fd)
             sock.close()
 
